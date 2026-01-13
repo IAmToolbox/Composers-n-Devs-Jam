@@ -15,3 +15,9 @@ texture = ExtResource("2_uapwn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_5odhx")
+
+[node name="ShieldTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="ShieldTimer" to="." method="_on_shield_timer_timeout"]
