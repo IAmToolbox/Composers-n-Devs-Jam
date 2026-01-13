@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Composers 'n' Devs Jam"
-run/main_scene="uid://1ihtj3tw6hrw"
+run/main_scene="uid://cj8de0sp2j0ud"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SCREEN_TRANS="*res://menu/transition.tscn"
 
 [display]
 
