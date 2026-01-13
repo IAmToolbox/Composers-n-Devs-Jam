@@ -6,8 +6,10 @@ extends CharacterBody2D
 @export var treble_color := Color.from_rgba8(180, 0, 0, 255)
 
 @onready var shield_timer = $ShieldTimer
+@onready var dash_timer = $DashTimer
 
 var is_shielded := false
+var is_dashing := false
 
 signal mode_switched
 
@@ -43,15 +45,28 @@ func shield() -> void:
 	is_shielded = true
 	shield_timer.start()
 
+func dash() -> void:
+	is_dashing = true
+	speed = 1500
+	dash_timer.start()
+
 func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
 	if Input.is_action_just_pressed("switch_mode"):
 		switch_mode()
 	
-	if mode == "bass" and Input.is_action_just_pressed("click") and is_shielded == false:
-		shield()
+	if mode == "bass":
+		if Input.is_action_just_pressed("click") and is_shielded == false:
+			shield()
+		if Input.is_action_just_pressed("right_click") and is_dashing == false:
+			dash()
 
 func _on_shield_timer_timeout() -> void: # Callback for shield timer
 	modulate_color(mode)
 	is_shielded = false
+
+
+func _on_dash_timer_timeout() -> void: # Callback for dash timer
+	speed = 400
+	is_dashing = false
