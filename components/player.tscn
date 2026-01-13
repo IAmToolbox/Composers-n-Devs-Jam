@@ -20,4 +20,9 @@ shape = SubResource("RectangleShape2D_5odhx")
 wait_time = 3.0
 one_shot = true
 
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_shield_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
