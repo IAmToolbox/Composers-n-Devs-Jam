@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var enemy_scene: PackedScene
+@export var enemy_scene: Array[PackedScene]
 
 @onready var player = $player
 @onready var label = $Label
@@ -10,7 +10,7 @@ func _on_player_mode_switched() -> void:
 	label.text = "Mode: " + player.mode
 
 func _on_enemy_spawn_timer_timeout() -> void: # TODO: Replace this function with something that allows the enemy to actually follow the player
-	var enemy = enemy_scene.instantiate()
+	var enemy = enemy_scene[randi_range(0,1)].instantiate()
 	var enemy_spawn_location := $EnemySpawn/EnemySpawnLocation
 	enemy_spawn_location.progress_ratio = randf()
 	enemy.position = enemy_spawn_location.position

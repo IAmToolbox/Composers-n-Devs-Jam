@@ -7,7 +7,6 @@
 size = Vector2(128, 128)
 
 [node name="BassEnemy" type="RigidBody2D"]
-collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_43slc")
 
@@ -16,6 +15,7 @@ texture = ExtResource("2_pmvr2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2a5rb")
+disabled = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

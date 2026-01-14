@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh2f7byf20ll4"]
+
+[ext_resource type="Script" uid="uid://dhtnp035gbn5u" path="res://components/treble_enemy.gd" id="1_oyd0b"]
+[ext_resource type="Texture2D" uid="uid://bcgfvs3fwj2t1" path="res://icon.svg" id="2_l15m4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwyr7"]
+size = Vector2(128, 128)
+
+[node name="TrebleEnemy" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_oyd0b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_l15m4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mwyr7")
+disabled = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
