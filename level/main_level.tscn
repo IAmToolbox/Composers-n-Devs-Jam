@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://1ihtj3tw6hrw"]
+[gd_scene load_steps=5 format=3 uid="uid://1ihtj3tw6hrw"]
 
 [ext_resource type="Script" uid="uid://b8hhl235b7trv" path="res://level/main_level.gd" id="1_evyck"]
+[ext_resource type="PackedScene" uid="uid://b8en561csqn3k" path="res://components/bass_enemy.tscn" id="2_43ii6"]
 [ext_resource type="PackedScene" uid="uid://d2rbfsfprmshc" path="res://components/player.tscn" id="2_54fhk"]
+
+[sub_resource type="Curve2D" id="Curve2D_o7jp2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1, -2, 0, 0, 0, 0, 1923, 1, 0, 0, 0, 0, 1921, 1080, 0, 0, 0, 0, 1, 1083, 0, 0, 0, 0, 1, -2)
+}
+point_count = 5
 
 [node name="mainLevel" type="Node2D"]
 script = ExtResource("1_evyck")
+enemy_scene = ExtResource("2_43ii6")
 
 [node name="player" parent="." instance=ExtResource("2_54fhk")]
 position = Vector2(943, 549)
@@ -17,4 +25,16 @@ offset_bottom = 96.0
 theme_override_font_sizes/font_size = 50
 text = "Mode: bass"
 
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="EnemySpawn" type="Path2D" parent="."]
+curve = SubResource("Curve2D_o7jp2")
+
+[node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawn"]
+position = Vector2(1, -2)
+rotation = 0.0015608728
+
 [connection signal="mode_switched" from="player" to="." method="_on_player_mode_switched"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

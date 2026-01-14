@@ -2,10 +2,13 @@
 ## Abstract class for enemies to inherit from
 
 ## This function is called when the enemy needs to move towards the player
-@abstract func move_towards_player()
+func _move_towards_player() -> void:
+	pass
 
 ## This function is called when the enemy needs to move towards an arbitrary target
-@abstract func move_towards_target()
+func _move_towards_target() -> void:
+	pass
 
 ## This function is called when the enemy fires a projectile
-@abstract func fire_projectile()
+func _fire_projectile() -> void:
+	pass
