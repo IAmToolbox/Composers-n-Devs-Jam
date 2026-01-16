@@ -5,8 +5,9 @@ extends CharacterBody2D
 @export var bass_color := Color.from_rgba8(0, 0, 180, 255)
 @export var treble_color := Color.from_rgba8(180, 0, 0, 255)
 
-@onready var shield_timer = $ShieldTimer
-@onready var dash_timer = $DashTimer
+@onready var shield_timer := $ShieldTimer
+@onready var dash_timer := $DashTimer
+@onready var bullet_scene := preload("res://components/player_bullet.tscn")
 
 var is_shielded := false
 var is_dashing := false
@@ -50,6 +51,12 @@ func dash() -> void:
 	speed = 1500
 	dash_timer.start()
 
+func shoot() -> void:
+	var bullet = bullet_scene.instantiate()
+	bullet.position = position
+	bullet.bullet_direction = (position - get_global_mouse_position()).normalized()
+	get_parent().add_child(bullet)
+
 func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
@@ -61,6 +68,9 @@ func _physics_process(_delta: float) -> void:
 			shield()
 		if Input.is_action_just_pressed("right_click") and is_dashing == false:
 			dash()
+	if mode == "treble":
+		if Input.is_action_just_pressed("click"):
+			shoot()
 
 func _on_shield_timer_timeout() -> void: # Callback for shield timer
 	modulate_color(mode)
