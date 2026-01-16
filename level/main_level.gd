@@ -19,7 +19,7 @@ func _on_enemy_spawn_timer_timeout() -> void: # TODO: Replace this function with
 	direction += randf_range(-PI / 4, PI / 4)
 	enemy.rotation = direction
 	
-	var velocity := Vector2(randf_range(150.0, 200.0), 0)
-	enemy.linear_velocity = velocity.rotated(direction)
+	#var velocity := Vector2(randf_range(150.0, 200.0), 0)
+	#enemy.set_velocity(velocity.rotated(direction))
 	
 	add_child(enemy)

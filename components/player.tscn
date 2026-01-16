@@ -1,18 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2rbfsfprmshc"]
+[gd_scene load_steps=5 format=3 uid="uid://d2rbfsfprmshc"]
 
 [ext_resource type="Script" uid="uid://bqyltdj3lrthg" path="res://components/player.gd" id="1_51jd6"]
 [ext_resource type="Texture2D" uid="uid://bcgfvs3fwj2t1" path="res://icon.svg" id="2_uapwn"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51jd6"]
+size = Vector2(128, 128)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5odhx"]
-size = Vector2(129, 128)
+size = Vector2(96, 96)
 
 [node name="player" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_mask = 6
 script = ExtResource("1_51jd6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_uapwn")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_51jd6")
+debug_color = Color(0.96099085, 0, 0.51563966, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
@@ -26,5 +34,6 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_shield_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

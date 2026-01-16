@@ -1,21 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8en561csqn3k"]
+[gd_scene load_steps=5 format=3 uid="uid://b8en561csqn3k"]
 
 [ext_resource type="Script" uid="uid://cujwhwdoyi05m" path="res://components/bass_enemy.gd" id="1_43slc"]
 [ext_resource type="Texture2D" uid="uid://bcgfvs3fwj2t1" path="res://icon.svg" id="2_pmvr2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a5rb"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43slc"]
 size = Vector2(128, 128)
 
-[node name="BassEnemy" type="RigidBody2D"]
-gravity_scale = 0.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a5rb"]
+size = Vector2(96, 96)
+
+[node name="BassEnemy" type="CharacterBody2D"]
+collision_layer = 4
 script = ExtResource("1_43slc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pmvr2")
 
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_43slc")
+debug_color = Color(0.96099085, 0, 0.51563966, 0.41960785)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2a5rb")
-disabled = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

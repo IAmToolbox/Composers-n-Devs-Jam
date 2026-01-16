@@ -70,3 +70,17 @@ func _on_shield_timer_timeout() -> void: # Callback for shield timer
 func _on_dash_timer_timeout() -> void: # Callback for dash timer
 	speed = 400
 	is_dashing = false
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	var entity_class = area.get_parent().get_script().get_global_name()
+	
+	if entity_class == "TrebleEnemy" || entity_class == "BassEnemy":
+		if is_shielded:
+			if is_dashing:
+				area.get_parent().queue_free() #change later to trigger proper death anim and/or when enemies have actual health
+				print('killed ' + entity_class)
+			else:
+				print('blocked contact with ' + entity_class)
+		else:
+			print('got hurt by ' + entity_class)
