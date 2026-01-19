@@ -1,7 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8en561csqn3k"]
+[gd_scene load_steps=13 format=3 uid="uid://b8en561csqn3k"]
 
 [ext_resource type="Script" uid="uid://cujwhwdoyi05m" path="res://components/bass_enemy.gd" id="1_43slc"]
-[ext_resource type="Texture2D" uid="uid://bcgfvs3fwj2t1" path="res://icon.svg" id="2_pmvr2"]
+[ext_resource type="Texture2D" uid="uid://ck1titmav7mnv" path="res://art/KIRBOLIKE_RUN.png" id="2_43slc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmvr2"]
+atlas = ExtResource("2_43slc")
+region = Rect2(138, 82, 647, 644)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a5rb"]
+atlas = ExtResource("2_43slc")
+region = Rect2(138, 758, 647, 644)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5n1no"]
+atlas = ExtResource("2_43slc")
+region = Rect2(138, 1434, 647, 644)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a4nh"]
+atlas = ExtResource("2_43slc")
+region = Rect2(138, 2110, 647, 644)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tgyc"]
+atlas = ExtResource("2_43slc")
+region = Rect2(138, 2786, 647, 644)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmyaf"]
+atlas = ExtResource("2_43slc")
+region = Rect2(138, 3462, 647, 644)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m82p"]
+atlas = ExtResource("2_43slc")
+region = Rect2(138, 4138, 647, 644)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m7pm3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmvr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a5rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5n1no")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5a4nh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tgyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmyaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m82p")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43slc"]
 size = Vector2(128, 128)
@@ -13,8 +70,11 @@ size = Vector2(96, 96)
 collision_layer = 4
 script = ExtResource("1_43slc")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_pmvr2")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.9073486e-06, 3.33786e-06)
+scale = Vector2(0.199, 0.199)
+sprite_frames = SubResource("SpriteFrames_m7pm3")
+animation = &"run"
 
 [node name="Hitbox" type="Area2D" parent="."]
 
