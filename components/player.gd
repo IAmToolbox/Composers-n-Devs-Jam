@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var shield_timer := $ShieldTimer
 @onready var dash_timer := $DashTimer
 @onready var bullet_scene := preload("res://components/player_bullet.tscn")
+@onready var slash_scene := preload("res://components/player_slash.tscn")
 
 var is_shielded := false
 var is_dashing := false
@@ -57,6 +58,12 @@ func shoot() -> void:
 	bullet.bullet_direction = (position - get_global_mouse_position()).normalized()
 	get_parent().add_child(bullet)
 
+func slash() -> void:
+	@warning_ignore("shadowed_variable") # The machinations of my mind are an enigma - Toolbox
+	var slash = slash_scene.instantiate()
+	slash.position = position
+	get_parent().add_child(slash)
+
 func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
@@ -71,6 +78,8 @@ func _physics_process(_delta: float) -> void:
 	if mode == "treble":
 		if Input.is_action_just_pressed("click"):
 			shoot()
+		if Input.is_action_just_pressed("right_click"):
+			slash()
 
 func _on_shield_timer_timeout() -> void: # Callback for shield timer
 	modulate_color(mode)

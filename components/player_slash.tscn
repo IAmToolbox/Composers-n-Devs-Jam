@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyuvhw0il530x"]
+
+[ext_resource type="Script" uid="uid://bv04c0uspuhoj" path="res://components/player_slash.gd" id="1_81lmh"]
+[ext_resource type="Texture2D" uid="uid://bcgfvs3fwj2t1" path="res://icon.svg" id="1_tcm33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81lmh"]
+size = Vector2(265, 129)
+
+[node name="PlayerSlash" type="Area2D"]
+script = ExtResource("1_81lmh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.49803922)
+position = Vector2(131.955, 0)
+scale = Vector2(2.06, 1)
+texture = ExtResource("1_tcm33")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(132.5, 0.5)
+shape = SubResource("RectangleShape2D_81lmh")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
