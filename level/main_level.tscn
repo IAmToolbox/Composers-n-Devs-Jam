@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://1ihtj3tw6hrw"]
+[gd_scene load_steps=8 format=3 uid="uid://1ihtj3tw6hrw"]
 
 [ext_resource type="Script" uid="uid://b8hhl235b7trv" path="res://level/main_level.gd" id="1_evyck"]
 [ext_resource type="PackedScene" uid="uid://b8en561csqn3k" path="res://components/bass_enemy.tscn" id="2_43ii6"]
 [ext_resource type="PackedScene" uid="uid://d2rbfsfprmshc" path="res://components/player.tscn" id="2_54fhk"]
 [ext_resource type="PackedScene" uid="uid://bh2f7byf20ll4" path="res://components/treble_enemy.tscn" id="3_43ii6"]
+[ext_resource type="AudioStream" uid="uid://bv632ydwut82c" path="res://music/bass.wav" id="5_i2c4w"]
+[ext_resource type="AudioStream" uid="uid://2u0esr2ttpr3" path="res://music/treble.wav" id="6_05d1k"]
 
 [sub_resource type="Curve2D" id="Curve2D_o7jp2"]
 _data = {
@@ -36,6 +38,16 @@ curve = SubResource("Curve2D_o7jp2")
 [node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawn"]
 position = Vector2(1, -2)
 rotation = 0.0015608728
+
+[node name="BassMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_i2c4w")
+autoplay = true
+bus = &"BassMusic"
+
+[node name="TrebleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_05d1k")
+autoplay = true
+bus = &"TrebleMusic"
 
 [connection signal="mode_switched" from="player" to="." method="_on_player_mode_switched"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
